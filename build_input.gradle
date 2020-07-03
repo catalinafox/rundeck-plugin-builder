@@ -3,28 +3,6 @@ plugins {
     id 'maven'
 }
 
-project('test1') {
-    sourceSets {
-        main {
-            java {
-                srcDir '../src'
-                include 'test1/**'
-            }
-        }
-    }
-}
-
-project('test2') {
-    sourceSets {
-        main {
-            java {
-                srcDir '../src'
-                include 'test2/**'
-            }
-        }
-    }
-}
-
 group 'org.example'
 version '1.0-SNAPSHOT'
 
