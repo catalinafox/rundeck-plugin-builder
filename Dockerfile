@@ -12,11 +12,11 @@ RUN wget https://dl.bintray.com/rundeck/rundeck-deb/$RUNDECK_DEB
 RUN dpkg -i $RUNDECK_DEB && rm $RUNDECK_DEB
 
 COPY ./ .
-RUN pip3 install -r requirements.txt
-
-WORKDIR src/
-RUN gradle wrapper # TODO where?
-RUN python3 build.py
+RUN gradle wrapper
+RUN pip3 install -r ./requirements.txt
+RUN ./build.py --input=input-verbose.txt
+RUN gradle assemble
+RUN cp build/libs/* /var/lib/rundeck/libext
 
 # tail null so the container doesn't stop after Rundeck service is started
 CMD /etc/init.d/rundeckd start && tail -f /dev/null
